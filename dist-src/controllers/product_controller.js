@@ -146,3 +146,42 @@ exports.show = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+
+exports.productsByCategory = /*#__PURE__*/function () {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res, next) {
+    var products;
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return _models["default"].Product.find({
+              category_id: req.params.id
+            });
+
+          case 3:
+            products = _context4.sent;
+            return _context4.abrupt("return", res.status(200).json({
+              "products": products
+            }));
+
+          case 7:
+            _context4.prev = 7;
+            _context4.t0 = _context4["catch"](0);
+            return _context4.abrupt("return", res.json({
+              error: "".concat(_context4.t0.message)
+            }));
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 7]]);
+  }));
+
+  return function (_x10, _x11, _x12) {
+    return _ref4.apply(this, arguments);
+  };
+}();

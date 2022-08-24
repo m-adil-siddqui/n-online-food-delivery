@@ -63,6 +63,22 @@ exports.show = async (req, res, next) => {
     }
 }
 
+exports.productsByCategory = async (req, res, next) => {
+    try{
+        
+        const products = await models.Product.find({category_id: req.params.id});
+        // const product = await models.Product.aggregate([
+        //     {
+        //         $match :{category_id: "6305f3ac9c1a8f33e443f2b4"}
+        //     }
+        // ]);
+    
+        return res.status(200).json({"products": products});
+    }catch(err){
+        return res.json({error : `${err.message}`})
+    }
+}
+
     
 
 
