@@ -43,7 +43,10 @@ GET LIST OF PRODUCTS
 */
 
 exports.index = async (req, res, next) => {
-    const products = await models.Product.find({}).populate('category_id');
+    const products = await models.Product.find({}).populate({
+        path:'category_id',
+        select: 'title'
+    });
     return res.status(200).json({"products": products});
 }
 

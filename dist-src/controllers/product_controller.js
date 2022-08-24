@@ -75,7 +75,10 @@ exports.index = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _models["default"].Product.find({}).populate('category_id');
+            return _models["default"].Product.find({}).populate({
+              path: 'category_id',
+              select: 'title'
+            });
 
           case 2:
             products = _context2.sent;
