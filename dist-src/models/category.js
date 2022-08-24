@@ -18,6 +18,9 @@ var categorySchema = new _mongoose["default"].Schema({
   },
   desc: {
     type: String
+  },
+  image: {
+    type: String
   } // user_id:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
 
 });

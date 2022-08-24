@@ -3,8 +3,9 @@ import timestamps from "mongoose-timestamp";
 
 const categorySchema = new mongoose.Schema({
 
-    title:{type:String, required:true},
-    desc :{type:String},
+    title :{type:String, required:true},
+    desc  :{type:String},
+    image :{type:String},
     // user_id:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
 
 })

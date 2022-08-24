@@ -15,37 +15,40 @@ CREATE NEW CATEGORY
 */
 exports.store = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res, next) {
+    var img;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
+            img = "/category/" + req.files[0].originalname;
+            _context.next = 4;
             return _models["default"].Category.create({
               title: req.body.title,
-              desc: req.body.desc
+              desc: req.body.desc,
+              image: img
             });
 
-          case 3:
+          case 4:
             return _context.abrupt("return", res.status(201).json({
               "success": true,
               message: "Category successfully created!"
             }));
 
-          case 6:
-            _context.prev = 6;
+          case 7:
+            _context.prev = 7;
             _context.t0 = _context["catch"](0);
             return _context.abrupt("return", res.status(500).json({
               "success": false,
               message: "ERROR: ".concat(_context.t0.message)
             }));
 
-          case 9:
+          case 10:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 6]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function (_x, _x2, _x3) {
@@ -76,7 +79,8 @@ exports.index = /*#__PURE__*/function () {
                   }
                 },
                 title: 1,
-                desc: 1
+                desc: 1,
+                image: 1
               }
             }]);
 

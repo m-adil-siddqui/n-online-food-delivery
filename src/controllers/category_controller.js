@@ -7,10 +7,14 @@ CREATE NEW CATEGORY
 */
 exports.store = async (req, res, next) => {
     try {
+
+
+        const img = `/category/`+req.files[0].originalname
         
         await models.Category.create({
             title       : req.body.title,
             desc        : req.body.desc,
+            image       : img
         });
         
         return res.status(201).json({"success" : true, message : "Category successfully created!"});
@@ -35,7 +39,8 @@ exports.index = async (req, res, next) => {
             $project: {
                 created_at: { $dateToString: { format: "%Y-%m-%d", date: "$created_at" } },
                 title : 1,
-                desc  : 1
+                desc  : 1,
+                image : 1
             }
         }
     ]);
