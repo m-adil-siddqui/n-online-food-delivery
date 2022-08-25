@@ -21,7 +21,7 @@ exports.store = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            img = "/category/" + req.files[0].originalname;
+            img = "/category/" + req.file.originalname;
             _context.next = 4;
             return _models["default"].Category.create({
               title: req.body.title,

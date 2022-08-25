@@ -67,4 +67,63 @@ exports.galleryUploadFile = function (file_path, file_limit) {
   } catch (err) {
     console.log(err.message);
   }
+}; //single file upload
+
+
+exports.uploadFile = function (file_path) {
+  try {
+    var storage = _multer["default"].diskStorage({
+      destination: function () {
+        var _destination2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, file, cb) {
+          return _regenerator["default"].wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  cb(null, _path["default"].join(__dirname, file_path));
+
+                case 1:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        function destination(_x4, _x5, _x6) {
+          return _destination2.apply(this, arguments);
+        }
+
+        return destination;
+      }(),
+      filename: function filename(req, file, cb) {
+        var extension = _path["default"].extname(file.originalname);
+
+        var basename = _path["default"].basename(file.originalname, extension);
+
+        var fileName = basename + '_' + Date.now() + extension;
+        file.originalname = fileName;
+        cb(null, fileName);
+      }
+    });
+
+    var filterFile = function filterFile(req, file, cb) {
+      if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
+        cb(null, true);
+      } else {
+        cb(new Error('Gallery image must be png, jpg, or jpeg'));
+        return;
+      }
+    };
+
+    var uploadedFile = (0, _multer["default"])({
+      storage: storage,
+      limits: {
+        fileSize: 1024 * 1024 * 5
+      },
+      fileFilter: filterFile
+    }).single('image');
+    return uploadedFile;
+  } catch (err) {
+    console.log(err.message);
+  }
 };

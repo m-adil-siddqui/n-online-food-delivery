@@ -9,7 +9,7 @@ exports.store = async (req, res, next) => {
     try {
 
 
-        const img = `/category/`+req.files[0].originalname
+        const img = `/category/`+req.file.originalname
         
         await models.Category.create({
             title       : req.body.title,

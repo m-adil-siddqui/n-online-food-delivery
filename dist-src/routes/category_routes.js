@@ -15,7 +15,7 @@ var _function = require("../common/helpers/function");
 
 var router = _express["default"].Router();
 
-router.route('/').get(_category_controller.index).post((0, _function.galleryUploadFile)("../../../public/images/category", 1), _category_controller.store);
+router.route('/').get(_category_controller.index).post((0, _function.uploadFile)("../../../public/images/category"), _category_controller.store);
 router.route('/:id').get(_category_controller.show).put(_category_controller.update)["delete"](_category_controller.destory);
 var _default = router;
 exports["default"] = _default;

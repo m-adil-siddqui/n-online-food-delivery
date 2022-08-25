@@ -24,7 +24,7 @@ var debug = (0, _debug["default"])('onlinequiz:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '9100');
+var port = normalizePort(process.env.PORT || '3000');
 
 _app["default"].set('port', port);
 /**
