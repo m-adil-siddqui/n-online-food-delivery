@@ -79,7 +79,7 @@ exports.uploadFile = function (file_path) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  cb(null, _path["default"].join(__dirname, file_path));
+                  cb(null, _path["default"].join(__dirname, "../../../public/" + file_path));
 
                 case 1:
                 case "end":

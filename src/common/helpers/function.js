@@ -51,7 +51,7 @@ exports.galleryUploadFile = (file_path, file_limit) => {
         
       var storage = multer.diskStorage({
       destination: async function (req, file, cb) {
-        cb(null,path.join(__dirname, file_path))
+        cb(null,path.join(__dirname, "../../../public/"+file_path))
       },
   
       filename: function (req, file, cb) {
