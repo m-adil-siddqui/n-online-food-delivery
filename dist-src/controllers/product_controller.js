@@ -146,8 +146,17 @@ exports.show = /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }();
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ * SEARCH PRODUCTS HANDLER
+ */
 
-exports.productsByCategory = /*#__PURE__*/function () {
+
+exports.searchProduct = /*#__PURE__*/function () {
   var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res, next) {
     var products;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
@@ -157,7 +166,15 @@ exports.productsByCategory = /*#__PURE__*/function () {
             _context4.prev = 0;
             _context4.next = 3;
             return _models["default"].Product.find({
-              category_id: req.params.id
+              "$or": [{
+                title: {
+                  $regex: req.params.query
+                }
+              }, {
+                tagline: {
+                  $regex: req.params.query
+                }
+              }]
             });
 
           case 3:
@@ -169,7 +186,7 @@ exports.productsByCategory = /*#__PURE__*/function () {
           case 7:
             _context4.prev = 7;
             _context4.t0 = _context4["catch"](0);
-            return _context4.abrupt("return", res.json({
+            return _context4.abrupt("return", res.status(_context4.t0.status || 500).json({
               error: "".concat(_context4.t0.message)
             }));
 
@@ -183,5 +200,44 @@ exports.productsByCategory = /*#__PURE__*/function () {
 
   return function (_x10, _x11, _x12) {
     return _ref4.apply(this, arguments);
+  };
+}();
+
+exports.productsByCategory = /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res, next) {
+    var products;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return _models["default"].Product.find({
+              category_id: req.params.id
+            });
+
+          case 3:
+            products = _context5.sent;
+            return _context5.abrupt("return", res.status(200).json({
+              "products": products
+            }));
+
+          case 7:
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
+            return _context5.abrupt("return", res.json({
+              error: "".concat(_context5.t0.message)
+            }));
+
+          case 10:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 7]]);
+  }));
+
+  return function (_x13, _x14, _x15) {
+    return _ref5.apply(this, arguments);
   };
 }();

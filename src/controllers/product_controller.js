@@ -63,6 +63,33 @@ exports.show = async (req, res, next) => {
     }
 }
 
+
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ * SEARCH PRODUCTS HANDLER
+ */
+exports.searchProduct = async (req, res, next) => {
+    try{
+        const products = await models.Product.find({
+            "$or" : [
+                {title: {$regex: req.params.query}},
+                {tagline: {$regex: req.params.query}}
+            ]
+        });
+        return res.status(200).json({"products": products});
+    }catch(err){
+        return res.status(err.status || 500).json({error : `${err.message}`});
+    }
+}
+
+
+
+
 exports.productsByCategory = async (req, res, next) => {
     try{
         
