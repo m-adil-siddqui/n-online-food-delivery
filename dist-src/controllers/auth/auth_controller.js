@@ -72,18 +72,17 @@ exports.loginUser = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            console.log('----------------------------');
-            _context2.next = 4;
+            _context2.next = 3;
             return _models["default"].User.findOne({
               'email': req.body.email
             });
 
-          case 4:
+          case 3:
             _user = _context2.sent;
             console.log(_user);
 
             if (_user) {
-              _context2.next = 8;
+              _context2.next = 7;
               break;
             }
 
@@ -92,9 +91,9 @@ exports.loginUser = /*#__PURE__*/function () {
               "_error": true
             }));
 
-          case 8:
+          case 7:
             if (!_bcrypt["default"].compareSync(req.body.password, _user.password)) {
-              _context2.next = 14;
+              _context2.next = 13;
               break;
             }
 
@@ -114,30 +113,30 @@ exports.loginUser = /*#__PURE__*/function () {
               "_error": false
             }));
 
-          case 14:
+          case 13:
             return _context2.abrupt("return", res.status(422).json({
               "message": "Login credentials is wrong.",
               "_error": true
             }));
 
-          case 15:
-            _context2.next = 20;
+          case 14:
+            _context2.next = 19;
             break;
 
-          case 17:
-            _context2.prev = 17;
+          case 16:
+            _context2.prev = 16;
             _context2.t0 = _context2["catch"](0);
             return _context2.abrupt("return", res.status(500).json({
               "message": _context2.t0.message,
               "_error": true
             }));
 
-          case 20:
+          case 19:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 17]]);
+    }, _callee2, null, [[0, 16]]);
   }));
 
   return function (_x4, _x5, _x6) {
@@ -228,14 +227,72 @@ exports.store_profile = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+/*
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+EDIT USER PROFILE FOR MOBILE API
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+*/
 
-exports.google_social_auth = /*#__PURE__*/function () {
+
+exports.editProfile = /*#__PURE__*/function () {
   var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res, next) {
-    var _token;
+    var _user, img;
 
     return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.prev = 0;
+            _context5.next = 3;
+            return _models["default"].User.findById(req.params.id);
+
+          case 3:
+            _user = _context5.sent;
+            img = "/images/user/" + req.file.originalname;
+            console.log(req.file.originalname); //  return img;
+
+            _user.full_name = req.body.full_name;
+            _user.email = req.body.email;
+            _user.phone_number = req.body.phone;
+            _user.thumbnail = img;
+            _user.dob = req.body.dob;
+            _user.is_profile_complete = true;
+
+            _user.save();
+
+            return _context5.abrupt("return", res.status(200).json({
+              user: _user,
+              _error: false
+            }));
+
+          case 16:
+            _context5.prev = 16;
+            _context5.t0 = _context5["catch"](0);
+            return _context5.abrupt("return", res.status(500).json({
+              "message": _context5.t0.message,
+              "_error": true
+            }));
+
+          case 19:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, null, [[0, 16]]);
+  }));
+
+  return function (_x13, _x14, _x15) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+exports.google_social_auth = /*#__PURE__*/function () {
+  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res, next) {
+    var _token;
+
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             req.session.user = req.user;
             _token = _jsonwebtoken["default"].sign({
@@ -244,7 +301,7 @@ exports.google_social_auth = /*#__PURE__*/function () {
             }, "sldfsd0fas9df809as8f", {
               expiresIn: "1h"
             });
-            return _context5.abrupt("return", res.status(200).json({
+            return _context6.abrupt("return", res.status(200).json({
               "message": "Logged in successfully",
               "token": _token,
               "_error": false
@@ -252,40 +309,40 @@ exports.google_social_auth = /*#__PURE__*/function () {
 
           case 3:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5);
+    }, _callee6);
   }));
 
-  return function (_x13, _x14, _x15) {
-    return _ref5.apply(this, arguments);
+  return function (_x16, _x17, _x18) {
+    return _ref6.apply(this, arguments);
   };
 }();
 
 exports.store_google_user = /*#__PURE__*/function () {
-  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res, next) {
+  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res, next) {
     var _user, _token;
 
-    return _regenerator["default"].wrap(function _callee6$(_context6) {
+    return _regenerator["default"].wrap(function _callee7$(_context7) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
-            _context6.prev = 0;
-            _context6.next = 3;
+            _context7.prev = 0;
+            _context7.next = 3;
             return _models["default"].User.findOne({
               social_id: req.body.id
             });
 
           case 3:
-            _user = _context6.sent;
+            _user = _context7.sent;
 
             if (_user) {
-              _context6.next = 8;
+              _context7.next = 8;
               break;
             }
 
-            _context6.next = 7;
+            _context7.next = 7;
             return new _models["default"].User({
               social_id: req.body.id,
               fname: req.body.fullname,
@@ -294,7 +351,7 @@ exports.store_google_user = /*#__PURE__*/function () {
             }).save();
 
           case 7:
-            _user = _context6.sent;
+            _user = _context7.sent;
 
           case 8:
             _token = _jsonwebtoken["default"].sign({
@@ -303,7 +360,7 @@ exports.store_google_user = /*#__PURE__*/function () {
             }, "sldfsd0fas9df809as8f", {
               expiresIn: "1h"
             });
-            return _context6.abrupt("return", res.status(200).json({
+            return _context7.abrupt("return", res.status(200).json({
               "_error": false,
               "is_profile_complete": _user.is_profile_complete,
               "token": _token,
@@ -311,22 +368,22 @@ exports.store_google_user = /*#__PURE__*/function () {
             }));
 
           case 12:
-            _context6.prev = 12;
-            _context6.t0 = _context6["catch"](0);
-            return _context6.abrupt("return", res.status(500).json({
+            _context7.prev = 12;
+            _context7.t0 = _context7["catch"](0);
+            return _context7.abrupt("return", res.status(500).json({
               "_error": true,
-              "message": _context6.t0.message
+              "message": _context7.t0.message
             }));
 
           case 15:
           case "end":
-            return _context6.stop();
+            return _context7.stop();
         }
       }
-    }, _callee6, null, [[0, 12]]);
+    }, _callee7, null, [[0, 12]]);
   }));
 
-  return function (_x16, _x17, _x18) {
-    return _ref6.apply(this, arguments);
+  return function (_x19, _x20, _x21) {
+    return _ref7.apply(this, arguments);
   };
 }();

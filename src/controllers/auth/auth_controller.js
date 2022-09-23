@@ -37,7 +37,6 @@ exports.registerUser = async (req, res, next) =>{
 
 exports.loginUser = async (req, res, next) => {
     try{
-        console.log('----------------------------')
         const _user = await models.User.findOne({'email':req.body.email});
         console.log(_user)
         if(!_user){
@@ -96,6 +95,40 @@ exports.store_profile = async (req, res, next) => {
     // console.log(req.query, req.body)
 
 }
+
+
+
+
+/*
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+EDIT USER PROFILE FOR MOBILE API
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+*/
+
+exports.editProfile = async (req, res, next) => {
+    try{
+        
+        const _user  = await models.User.findById(req.params.id);
+        const img = `/images/user/`+req.file.originalname;
+        console.log(req.file.originalname)
+        //  return img;
+        _user.full_name           = req.body.full_name;
+        _user.email               = req.body.email;
+        _user.phone_number        = req.body.phone;
+        _user.thumbnail           = img;
+        _user.dob                 = req.body.dob;
+        _user.is_profile_complete = true;
+        _user.save();
+
+        return res.status(200).json({user : _user, _error: false});
+
+    }catch(err){
+        return res.status(500).json({"message": err.message, "_error": true});
+    }    
+
+}
+
+
 
 exports.google_social_auth = async (req, res, next) => {
     req.session.user = req.user;

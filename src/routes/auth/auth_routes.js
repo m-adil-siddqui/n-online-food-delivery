@@ -1,13 +1,15 @@
 import express from "express";
 const router = express.Router();
-import { registerUser, loginUser, userDetails, store_profile, google_social_auth, store_google_user } from "controllers/auth/auth_controller";
+import { registerUser, loginUser, editProfile, userDetails, store_profile, google_social_auth, store_google_user } from "controllers/auth/auth_controller";
 import { auth } from "middlewares/auth_middleware";
 import passport from "passport"
+import {uploadFile} from "common/helpers/function";
 
 // router.post(`/register`, registerUser);
 router.post(`/login`, loginUser);
 router.get(`/user_details`, auth, userDetails);
 router.post(`/create/profile`, auth, store_profile);
+router.post(`/edit_profile/:id`, uploadFile(`images/user`), editProfile)
 
 router.route('/register').post(registerUser);
 // router.route('/:id').get(show).put(update).delete(destory)

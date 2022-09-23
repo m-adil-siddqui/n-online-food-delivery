@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     email               : {type:String, required:true},
     password            : {type:String},
     thumbnail           : {type:String},
+    dob                 : {type:String},
     is_profile_complete : {type:Boolean, default:false}
 })
 

@@ -36,6 +36,9 @@ var userSchema = new _mongoose["default"].Schema({
   thumbnail: {
     type: String
   },
+  dob: {
+    type: String
+  },
   is_profile_complete: {
     type: Boolean,
     "default": false
