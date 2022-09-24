@@ -23,7 +23,8 @@ var router = _express["default"].Router();
 router.post("/login", _auth_controller.loginUser);
 router.get("/user_details", _auth_middleware.auth, _auth_controller.userDetails);
 router.post("/create/profile", _auth_middleware.auth, _auth_controller.store_profile);
-router.post("/edit_profile/:id", (0, _function.uploadFile)("images/user"), _auth_controller.editProfile);
+router.post("/edit_profile/:id", _auth_controller.editProfile); // router.post(`/edit_profile/:id`, uploadFile(`images/user`), editProfile)
+
 router.route('/register').post(_auth_controller.registerUser); // router.route('/:id').get(show).put(update).delete(destory)
 // google+ authentications
 

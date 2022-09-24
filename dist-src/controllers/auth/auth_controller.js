@@ -248,8 +248,7 @@ exports.editProfile = /*#__PURE__*/function () {
 
           case 3:
             _user = _context5.sent;
-            img = "/images/user/" + req.file.originalname;
-            console.log(req.file.originalname); //  return img;
+            img = "/images/user/"; //+req.file.originalname;
 
             _user.full_name = req.body.full_name;
             _user.email = req.body.email;
@@ -265,20 +264,20 @@ exports.editProfile = /*#__PURE__*/function () {
               _error: false
             }));
 
-          case 16:
-            _context5.prev = 16;
+          case 15:
+            _context5.prev = 15;
             _context5.t0 = _context5["catch"](0);
             return _context5.abrupt("return", res.status(500).json({
               "message": _context5.t0.message,
               "_error": true
             }));
 
-          case 19:
+          case 18:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[0, 16]]);
+    }, _callee5, null, [[0, 15]]);
   }));
 
   return function (_x13, _x14, _x15) {

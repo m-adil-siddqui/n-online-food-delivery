@@ -64,6 +64,7 @@ exports.loginUser = async (req, res, next) => {
     }
 }
 
+
 exports.userDetails = async (req, res, next) => {
     const _user = await models.User.findById(req.payload.id);
     return res.json({"user": _user});
@@ -109,9 +110,8 @@ exports.editProfile = async (req, res, next) => {
     try{
         
         const _user  = await models.User.findById(req.params.id);
-        const img = `/images/user/`+req.file.originalname;
-        console.log(req.file.originalname)
-        //  return img;
+        const img = `/images/user/`;//+req.file.originalname;
+        
         _user.full_name           = req.body.full_name;
         _user.email               = req.body.email;
         _user.phone_number        = req.body.phone;
