@@ -244,12 +244,12 @@ exports.editProfile = /*#__PURE__*/function () {
           case 0:
             _context5.prev = 0;
             _context5.next = 3;
-            return _models["default"].User.findById(req.params.id);
+            return _models["default"].User.findById(req.body.id);
 
           case 3:
             _user = _context5.sent;
-            img = "/images/user/"; //+req.file.originalname;
-
+            img = "/images/user/" + req.file.originalname;
+            console.log(img);
             _user.full_name = req.body.full_name;
             _user.email = req.body.email;
             _user.phone_number = req.body.phone;
@@ -264,20 +264,21 @@ exports.editProfile = /*#__PURE__*/function () {
               _error: false
             }));
 
-          case 15:
-            _context5.prev = 15;
+          case 16:
+            _context5.prev = 16;
             _context5.t0 = _context5["catch"](0);
+            console.log("ERROR -----: ".concat(_context5.t0.message));
             return _context5.abrupt("return", res.status(500).json({
               "message": _context5.t0.message,
               "_error": true
             }));
 
-          case 18:
+          case 20:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[0, 15]]);
+    }, _callee5, null, [[0, 16]]);
   }));
 
   return function (_x13, _x14, _x15) {

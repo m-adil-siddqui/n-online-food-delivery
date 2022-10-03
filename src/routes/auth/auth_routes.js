@@ -9,8 +9,8 @@ import {uploadFile} from "common/helpers/function";
 router.post(`/login`, loginUser);
 router.get(`/user_details`, auth, userDetails);
 router.post(`/create/profile`, auth, store_profile);
-router.post(`/edit_profile/:id`, editProfile)
-// router.post(`/edit_profile/:id`, uploadFile(`images/user`), editProfile)
+// router.post(`/edit_profile`, editProfile)
+router.post(`/edit_profile`, editProfile)
 
 
 router.route('/register').post(registerUser);

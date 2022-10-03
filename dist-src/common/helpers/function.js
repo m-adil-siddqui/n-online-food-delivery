@@ -94,33 +94,32 @@ exports.uploadFile = function (file_path) {
         }
 
         return destination;
-      }(),
-      filename: function filename(req, file, cb) {
-        var extension = _path["default"].extname(file.originalname);
+      }() // filename: function (req, file, cb) {
+      //   let extension = path.extname(file.originalname);
+      //   let basename  = path.basename(file.originalname,extension);
+      //   let fileName = basename+'_'+Date.now() + extension;
+      //   file.originalname = fileName;
+      //   cb(null, fileName)
+      // }
 
-        var basename = _path["default"].basename(file.originalname, extension);
+    }); // const filterFile = (req, file, cb) => {
+    //   if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'
+    //     || file.mimetype === 'image/jpg'){
+    //     cb(null, true);
+    //   }
+    //   else{
+    //       cb(new Error('Gallery image must be png, jpg, or jpeg'))
+    //     return;
+    //     }
+    //   }
 
-        var fileName = basename + '_' + Date.now() + extension;
-        file.originalname = fileName;
-        cb(null, fileName);
-      }
-    });
-
-    var filterFile = function filterFile(req, file, cb) {
-      if (file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
-        cb(null, true);
-      } else {
-        cb(new Error('Gallery image must be png, jpg, or jpeg'));
-        return;
-      }
-    };
 
     var uploadedFile = (0, _multer["default"])({
-      storage: storage,
-      limits: {
-        fileSize: 1024 * 1024 * 5
-      },
-      fileFilter: filterFile
+      storage: storage // limits:{
+      //    fileSize: 1024 * 1024 * 5
+      // },
+      // fileFilter:filterFile
+
     }).single('image');
     return uploadedFile;
   } catch (err) {

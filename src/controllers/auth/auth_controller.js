@@ -108,10 +108,11 @@ EDIT USER PROFILE FOR MOBILE API
 
 exports.editProfile = async (req, res, next) => {
     try{
-        
-        const _user  = await models.User.findById(req.params.id);
-        const img = `/images/user/`;//+req.file.originalname;
-        
+        const _user  = await models.User.findById(req.body.id);
+        const img = `/images/user/`+req.file.originalname;
+        console.log(img)
+    
+
         _user.full_name           = req.body.full_name;
         _user.email               = req.body.email;
         _user.phone_number        = req.body.phone;
@@ -123,6 +124,7 @@ exports.editProfile = async (req, res, next) => {
         return res.status(200).json({user : _user, _error: false});
 
     }catch(err){
+        console.log(`ERROR -----: ${err.message}`)
         return res.status(500).json({"message": err.message, "_error": true});
     }    
 
